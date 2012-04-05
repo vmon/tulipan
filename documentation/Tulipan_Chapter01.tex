@@ -1,0 +1,43 @@
+
+\chapter{Introduction}
+\begin{flushright}\epsfig{file=Images/TulipanLogo.eps,height=3cm}\end{flushright}
+
+\section{Preamble}
+
+This guide is published as supplementary part to the first release of TULIPAN Software, a Secure Steganography Scheme. 
+
+In this Handbook we assume that the programmer uses Gnu Compiler Collection under a distribution of GNU/Linux Operating System.
+
+\section{What does Steganography signify?}
+
+All histories about the construction and the decay of the cultures and civilizations, have a central axis in common: the secrets. The necessity to hide information caused the great heroes and villains of history to undertake a legendary fight, between devising invulnerable forms to hide the secrets in best way possible and the continuous search to obtain these secrets.
+        
+ The creative mind of the human kind has found two answers to this need. {\it Cryptography} or the art of encrypting message, which was employed by Caesar as an example, and the {\it Stegangraphy} as the art of hiding message. The word steganography is derived from the Greek words ``steganos'' and ``graphein'' meaning ``covered'' and ``to write'' respectively; in other words, ``covered writing''. Hiding a message can be done in numerous ways. In Ancient time, a method was to tattoo a person's bald head with a message and after a while hairs would grow concealing the message. Once at the destination the head could again be shaved and the message would be revealed. Before invention of computers, a cover unimportant text could be used to contain the embedded message within it. For instance, every 12th letter of the cover message could be used as the hidden message. Other methods consisted of letter heights, using various chemicals for invisible ink and even microdot pricks, which became popular during World War II.
+        
+Nowadays, The conventional way of securing data transactions is through the use of standard encryption techniques such as RSA, 3DES, and AES. In the few past years, however, a new branch of data security techniques known as digital steganography has evolved and is continuing to receive a great deal of attention from both Academic and Industrial communities.
+        
+ The question is why steganography attracts so much interest comparing to other forms of secret communication, while in current situation, cryptography is considered as the strongest way of secure communication? One of the drawbacks of cryptography is the mere fact of knowing that communication is going on secretly. On the other hand, with steganography that fact could itself be hidden.
+        
+ Currently, the most sophisticated forms of steganography are embedding messages within digital pictures such as a Graphics Interchange Format (GIF) or JPEG files, sound files and even video files. The trick is to alter the file's insignificant information (for containing the message) such that the file itself does not show any visual or audio sign of alteration. The sender and recipient just need to agree, perhaps by having the embedding and extracting private algorithms to know how to send and receive a secret message. As code analyzers uncover disguise after disguise, it becomes an ongoing race to find unique ways to conceal messages. Combined with encryption, however, this form of secret communication would then be very strong because once the message is located, it then turns to a case of trying to decrypt it, which would be the case in normal cryptanalysis.
+        
+ Steganography is important for practical reasons as well, for instance in copyright and watermarking. If you have developed a digital picture, for example, and do not want anyone else to use it unless they pay you the royalties, then you can embed a particular set of bits into the picture (enough bits, not to change it visibly of course) such that you could track and identify your digital property anywhere it is being used. Watermarks can be set up in a fashion that does not allow effective alterations to the media. Also, whenever someone wants to alter your picture it causes an undesirable effect, perhaps by placing a big off-color X on top of the picture.
+        
+ In the very same way that the cryptanalysis has been born, steganography has an inseparable sister called steganalysis which designs both passive attacks to detect the mere existence of the hidden message in cover media or even tries to decode it and active attacks in purpose of destroying the (probable) hidden message.
+        
+ During past few years, steganography has grown both in academic and industrial fields. Many algorithms have been developed to implement more secure ways of hiding data and in parallel many statistical attacks to detect the employement of these methods. On the other hand, many commercial products have been developed and published to answer the need for communication market on Internet and other kinds of media.
+
+TULIPAN is a software designed in order to satisfy the goal of a secure steganogrphy scheme. TULIPAN hides the information in ordinary JPEG images (the most popular format used on the web) using one of the most recent and most secure~\cite{Kh04} algorithms, called Perturbed Quantization~\cite{PQ04}.
+
+\section{Overview of the Handbook}
+
+This handbook consists of three independent parts and each part is written for an independent purpose.
+
+Chapter 2, is a detailed explanation of the steganographic algorithm implemented in TULIPAN. The algorithm is chosen for its outstanding result in steganalysis tests but still it is subjected to improvement, in future versions.
+ 
+Chapter 3, is the user manual and the usage description of TULIPAN. Each entry to the command line of TULIPAN is discussed separately.
+
+Chapter 4 discusses the points that we have found useful and significant for prospective improvement. This chapter consists of several points to improve TULIPAN to result in a faster and more secure steganography.
+
+
+As TULIPAN is not a final version program, the Programmer's Guide is not provided. After improving the program structure and the release of final version, the next version of Handbook will contain the Programmer's Guide as well.
+

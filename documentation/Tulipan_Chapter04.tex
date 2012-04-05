@@ -1,0 +1,73 @@
+\chapter{Prospective Improvements to Tulipan Software}
+\begin{flushright}\epsfig{file=Images/TulipanLogo.eps,height=3cm}\end{flushright}
+
+As the deadline was a major concern in developing the first version of TULIPAN, it is programmed to reach an executable working release as soon as possible by ignoring some important points about software engineering and security. For above reason, although current release of TULIPAN is fully practical, its usage is not recommended for sensitive application.
+
+The developers of TULIPAN had above point in mind during the development of TULIPAN. In each step that they ignored some programming or security point to accelerate the implementation, they have submitted that item in a database. This chapter contains the entry of that database.
+
+\begin{itemize}
+  \item{\bf Improving the steganogrphy algorithm} 
+
+Although the algorithm used in TULIPAN is one of the most secure steganography algorithms recently designed, there is still a long way for improvement. When there are more dry coefficients than is needed many policies can be employed to get a more secure steganographic scheme. This is a place where we can simultaneously use two or more steganography algorithms. Our intention is to use our second choice, Model-Based Steganography in embedding process.
+
+  \item{\bf Adding Cryptographic Algorithm}
+It is much more convenient that the data be encrypted before it is embedded in the cover image. Encryption offers  two different aspects to the security: 
+	\begin{enumerate}
+	 \item If the scheme is broken the data remain secure.
+	 \item  The encryption decreases the redundancy of the data and results in more secure steganography. The statistical and blind steganalysis become much harder on the encrypted data.
+	\end{enumerate}
+	  Although it is not necessary but it is of convenience to include a cryptographic algorithm in TULIPAN.
+
+  \item {\bf Using random generator to randomly order the coefficients}
+
+	    The order of DCT Coefficients should be specified by a random generator to defuse the impact of steganography widely in the whole image. However, in this implementation the coefficients are used in the same order as they have been saved in the images. This approach was chosen for the ease of debugging and should be corrected in the improved version.
+	    
+	  \item {\bf Usage of Multilevel Humidity} In current version, the humidity of each coefficient is computed and will be sent to the embedder function as a boolean variable of Humid/Dry. For having a more secure scheme, the embedder should have graded humidity to choose the drier coefficient among others when there are extra choices.
+
+	  \item {\bf Allowing Free Size Requests} 
+In current version all requests for encoding length and the matrices have size which is integer multiple of BINARY\_STREAM\_BLOCK\_SIZE. However, for the sake of efficient usage of the embedding space, other sizes should be permitted.
+
+	    This, for example, puts limitation on header size. The header size is supposed to be a integer multiple of byte, but it leads to such a waste of capacity and is not acceptable. The inner loop of InjectMessage Function should be changed significantly.
+	
+	  \item {\bf Adding error correction coding} Perturbed Quantization does not offer any solution for robustness of the scheme nor does TULIPAN. A little change in a matrix header can damage all remainder data. It is essential to add error correction to the scheme to get a robust steganogrpahy.
+	  \item {\bf Including other layers during recompression and embedding process} Current version of TULIPAN recompresses and embeds the message into the luminance layer and stores the chrominance layers in their original quality. More than wasting embedding space, the ignorance of chrominance layers, is a handle to be abused by blind steganlizers to detect the existence of hidden message. For these reasons all layers should be employed both in recompression and embedding.
+
+           \item {\bf Capsulating all file accesses in one class}
+	     Currently in TULIPAN Implementation, each class opens files in the class code, whenever needed. In contrast, in more sophisticated projects like Crypto++, all file access is done in a unique class and other classes use that class for any File I/O Operation.
+	     \item{\bf Eliminating Optimized Number of Rows} In current version when a matrix is not full-row-rank, TULIPAN eliminates one row of it and tries again which is not optimized for all matrices. TULIPAN should compute an optimized estimation to eliminate many rows in each step.
+
+	   \item {\bf Taking the benefits of the fact that most coefficients are zero, in constructing parity sequence} As most coefficients are zero, they should not waste time in constructing and waste memory on transmitting parity sequence.
+
+	   \item {\bf Precomputation of Quantization Table Division} During recompression process we change the representation of coefficients from a quantization table into another one. This contains many repetitive computation, which can be computed once and stored in a table for further usages.
+
+	   \item {\bf Imitating the JPEG Rounding Function} In rounding 0.5 the JPEG library uses a method that should be imitated in the embedding process. It is like random walk for up or down Rounding. It is important because we should flee from Blind Steganalyzers, in others word to forge the recompressed image as an original JPEG Image. However, it is not so critical because we use these points for our purpose and we change them randomly to stop the biases.
+	   
+	   \item {\bf Using other random generators} Although random generator used in TULIPAN, SHA-512, is certified by NIST, it is not necessarily the best and most secure random generator. A research for choosing a more secure random generator and its implementation is needed.
+
+	     \item {\bf Including ratio r in secret scheme} The ratio r as discussed in Section~\ref{ChapAlgSecWetSubPrac} should be known to both sides of communication and is a part of secret scheme.
+
+	   \item {\bf Considering the inclusion of constant in Gaussian Elimination}
+It needs a statistical survey, to see if most of the time the code matrix is found to be full-row-rank or not. If it is the case, the constants of equations should be eliminated simultaneously. If it is not, they should be recomputed after the discovery of the right matrix.
+
+
+	   \item {\bf Putting embedding function in the right class} 
+In current version \texttt{MessageInjection} function is a member of DynamicMatrix Class for ease of access to the elements of the matrix but should be transfered to WetEncoder Class.
+
+	   \item {\bf Adding interface functions to all classes} For the sake of speed we give some direct access to protected-in-nature members of classes. Such access should be controlled by employment of interface functions.
+
+	   \item {\bf Using std::string instead of char* } Usage of  std::string instead of char* whenever we deal with strings like key, gives more human readable code.
+
+	   \item {\bf SAFETY FIRST Concerns} Includes usage of \texttt{const} type for function arguments.
+
+	   \item {\bf Performance Concerns} Includes dropping unnecessary castation in \texttt{long-double} operations, usage of register variables, dropping unnecessary allocation/freeing intermediates, Omitting unnecessary BinaryStream-BinarySequence Conversion, using TotalSize for BinaryMatrix Class, Using optimal random size, better Full-Row-Rank detection algorithm, using \texttt{int} instead of \texttt{long} for logarithmic size variables, etc. 
+
+	   For example, each time we make a new random matrix, we allocate a new block of memory for it. However, the memory allocation from heap is a slow process and as all of matrices have almost the same size, they can be stored in a same block of memory. The code should be changed so that the same memory block is used for random generation.
+
+	   Another critical example is that when the matrix fails the Gaussian elimination test, some initializations need not be done again and we should take them out of the loop.
+
+	   It is worthy of mention that memory management is not perfect and the program isn't proved against leakage.
+
+	   \item {\bf Readable Code Concerns} This item considers changing order of the
+	     functions to an appropriate order and wrapping codes inside functions.
+
+\end{itemize}

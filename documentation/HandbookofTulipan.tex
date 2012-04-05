@@ -1,0 +1,34 @@
+\documentclass[11pt]{book}
+\usepackage{epsfig}
+\setlength\oddsidemargin{0pt}
+\setlength\evensidemargin{0pt}
+\setlength{\textheight} {22cm}
+\setlength {\textwidth} {16cm}
+
+\title{
+\begin{center}\epsfig{file=Images/TulipanLogo.eps,height=8cm}\end{center}
+{\bf{\Huge Handbook\\of\\Tulipan}}
+\\[30pt]
+{\bf{\LARGE Secure Steganography Scheme}}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 2pt minus 1pt}
+\frenchspacing
+\sloppy
+
+\begin{document}
+\maketitle
+\pagenumbering{roman}
+\tableofcontents
+
+%\pagebreak
+
+\pagenumbering{arabic}
+{ \input Tulipan_Chapter01 }
+{ \input Tulipan_Chapter02 }
+{ \input Tulipan_Chapter03 }
+{ \input Tulipan_Chapter04 }
+\addcontentsline{toc}{chapter}{Bibliography}
+{ \input Tulipan_Bibliography }
+ 
+\end{document}

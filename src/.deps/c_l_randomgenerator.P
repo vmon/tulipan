@@ -1,0 +1,3 @@
+c_l_randomgenerator.o: c_l_randomgenerator.cpp c_l_randomgenerator.h
+c_l_randomgenerator.cpp :
+c_l_randomgenerator.h :

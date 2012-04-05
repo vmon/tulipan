@@ -1,0 +1,81 @@
+\chapter{TULIPAN User's Guide}
+\begin{flushright}\epsfig{file=Images/TulipanLogo.eps,height=3cm}\end{flushright}
+
+\section{Preliminaries}
+
+The TULIPAN is an image steganography tool. It means that the intention of its use is to hide a secret message inside an image an send it such that even the intention of sending such message becomes confidential. 
+
+For handling this communication, the sender and the recipient should use TULIPAN in two phases. First the sender should hide the message in an image. This step is called {\it Embedding Process} in this manual. The details of embedding process is explained in Section~\ref{Chap3Sec2}. The sender transmits the image on any insecure channel to the recipient. The recipient should use TULIPAN as well to get the secret message out of the image. This step is called {\it Retrieval Process} in this guide. The details of retrieval process is explained in~\ref{Chap3Sec3}.
+
+This version of TULIPAN is compiled to be run under GNU/Linux Operating Systems, however it can be recompiled for any other environment. As TULIPAN is a terminal based application, for running it:
+
+\begin{enumerate}
+  \item {If X-Windows system is running, open a terminal window.}
+  \item {Change the directory to where ``tulipan'' file exists.}
+  \item {Run Tulipn using following command:}
+
+    \texttt{./tulipan $<$SPECIFICATIONS$>$}
+    
+    For the detail of $<$SPECIFICATIONS$>$ , refer to Sections~\ref{Chap3Sec1.5},~\ref{Chap3Sec2} and~\ref{Chap3Sec2}.
+\end{enumerate}
+
+\section{General Usage}
+\label{Chap3Sec1.5} 
+
+For embedding process, user should use following command:
+
+\texttt{./tulipan -encode  <Message filename> <Cover image filename> <Output image filename> <Key> <Humidity threshold> <Recompression quality> <No of matrices>}
+
+The details of the options can be found in Section~\ref{Chap3Sec2}.
+
+For the retrieval process, user should use following command:
+
+\texttt{./tulipan -decode <Stego image filename> <Output message filename> <Key> <Humidity threshold> <No of matrices>}
+
+The details of the options can be found in Section~\ref{Chap3Sec3}.
+
+\section{Embedding Process}
+\label{Chap3Sec2}
+
+\subsection{Input/Output Files}
+For enabling TULIPAN to embed a secret message, two input files should be prepared and specified
+in TULIPAN command lines; these files are mentioned in Section~\ref{Chap3Sec1.5} as {\it Message filename} and {\it Cover image filename} respectively.
+
+\begin{itemize}
+  \item {\bf Message filename}: should be the complete path of the file that contains the secret message. The Message file can contain anything including text or binary data, image, voice etc. 
+
+  \item {\bf Cover image filename}: should specify complete path of a JPEG image. Although any JPEG image can be used as Cover Image, user should choose the size and quality of image regarding to the size of Message file. If a small low quality image is chosen, TULIPAN fails to fit the whole message inside the image and prompts an error message.
+
+  \item {\bf Output image filename}: should specify complete path of a new JPEG image. The result of embedding the message file into the Cover image will be a new JPEG image. The tulipan stores this image in the file specified by {Output image filename}. After running TULIPAN, the sender can transmit this file to the recipient to let them read the Message File.
+\end{itemize}
+
+\subsection{Secret Key}
+
+In TULIPAN, the secret key has a complicated structure to offer maximum security to the user. To reach a secure steganography, the user should set each part of the secret key appropriately.
+
+\begin{itemize}
+  \item{\bf Key} is the main part of Secret Key and is an ordinary string with ordinary size. Anybody who intends to read the Message in Output image needs to know the key string.
+
+  \item{\bf Humidity Threshold} For the security reason, TULIPAN does not use all part of JPEG image to embed the message. As it is defined in Section~\ref{ChapAlgSecPertSubMem}, only the dry elements of the JPEG image are allowed to be used in embedding process. The Humidity Threshold is a measure for TULIPAN to decide if an element is dry or wet. Humidity Threshold should be a number between 1 and 100. If Humidity Threshold sets to 100, all elements are considered as wet. The less the Humidity Threshold is, the more secure steganography is gained. The more the Humidity Threshold is, the greater Message can be embedded in the image.
+
+  \item{\bf Recompression Quality} is a number between 0 to 100. For embedding the message, TULIPAN recompresses the original image, to provide some dry elements. These dry elements will be used in embedding process. The important factor is that the recompression quality should be less than the original image quality. For an 80\% quality JPEG image, the 60\% recompression quality is recommended.
+
+  \item{\bf No. of Matrices} Many random matrices are used to code the message data. The user should specify the number of matrices in the command. No. of Matrices greatly influences the performance of TULIPAN and is needed for the retrieval process as well. Using too few Matrices, results in Big Matrices which slowly can be processed. On the other hand, using too many matrices wastes the embedding space for storing the headers and the embedding process may fail due to lack of embedding space. For a $600\times 800$ image, 500 matrices is a typical choice.
+
+\end{itemize}
+
+\section{Retrieval Process}
+\label{Chap3Sec3}
+\subsection{Input/Output Files}
+
+For enabling TULIPAN to retrieve a secret message, the outputted image of TULIPAN should be prepared and specified in TULIPAN command lines. Also, a new message file is needed, so that TULIPAN stores the result of retrieval process inside it. These files are mentioned in Section~\ref{Chap3Sec1.5} as {\it Output Message filename} and {\it Stego image filename} respectively.
+
+\begin{itemize}
+  \item {\bf Stego image filename}: should specify complete path of the JPEG image which is outputted by previous call to TULIPAN program with ``-encode'' option. This image is typically what sender transmits to recipient through an insecure channel.
+
+  \item {\bf Output message filename}: This should be the complete path of the new file. TULIPAN will use this file to store the retrieved information from Stego image.
+\end{itemize}
+
+\subsection{Secret Key}
+The secret key of the recipient is the same as the secret key of the sender. With the exception that the recipient does not need to know the recompression quality to retrieve the message.
+

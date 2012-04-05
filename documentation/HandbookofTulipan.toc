@@ -1,0 +1,27 @@
+\contentsline {chapter}{\numberline {1}Introduction}{3}
+\contentsline {section}{\numberline {1.1}Preamble}{3}
+\contentsline {section}{\numberline {1.2}What does Steganography signify?}{3}
+\contentsline {section}{\numberline {1.3}Overview of the Handbook}{5}
+\contentsline {chapter}{\numberline {2}The TULIPAN Steganogrpahy Algorithm}{7}
+\contentsline {section}{\numberline {2.1}Introduction}{7}
+\contentsline {section}{\numberline {2.2}Perturbed Quantization}{8}
+\contentsline {subsection}{\numberline {2.2.1}Information-reducing processes}{9}
+\contentsline {subsection}{\numberline {2.2.2}Memory with defective cells}{9}
+\contentsline {section}{\numberline {2.3}Wet Paper Code}{9}
+\contentsline {subsection}{\numberline {2.3.1}Encoder and Decoder}{9}
+\contentsline {subsection}{\numberline {2.3.2}Practical encoder/decoder implementation}{10}
+\contentsline {section}{\numberline {2.4}Average Capacity}{12}
+\contentsline {section}{\numberline {2.5}Double Compression}{12}
+\contentsline {section}{\numberline {2.6}Steganalysis}{13}
+\contentsline {section}{\numberline {2.7}Discussion and Conclusions}{14}
+\contentsline {chapter}{\numberline {3}TULIPAN User's Guide}{15}
+\contentsline {section}{\numberline {3.1}Preliminaries}{15}
+\contentsline {section}{\numberline {3.2}General Usage}{16}
+\contentsline {section}{\numberline {3.3}Embedding Process}{16}
+\contentsline {subsection}{\numberline {3.3.1}Input/Output Files}{16}
+\contentsline {subsection}{\numberline {3.3.2}Secret Key}{16}
+\contentsline {section}{\numberline {3.4}Retrieval Process}{17}
+\contentsline {subsection}{\numberline {3.4.1}Input/Output Files}{17}
+\contentsline {subsection}{\numberline {3.4.2}Secret Key}{17}
+\contentsline {chapter}{\numberline {4}Prospective Improvements to Tulipan Software}{19}
+\contentsline {chapter}{Bibliography}{22}
