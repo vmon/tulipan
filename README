@@ -1,0 +1,10 @@
+For some strange reason, when I compile SHA.cpp with make script, my computer 
+crashes due to runnig out of memory. The work around is to compile it 
+manually, before running make:
+
+./configure
+cd src/
+g++ -c SHA.cpp
+cd ..
+make
+
